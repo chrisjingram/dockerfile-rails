@@ -141,6 +141,11 @@ ARG <%= deploy_args.map {|key, value| "#{key}=#{value.inspect}"}.join(" \\\n    
 
 <% end -%>
 <% unless deploy_packages.empty? -%>
+
+# Repo for postgresql-client-14
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+    echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+
 # Install packages needed for deployment
 <%= render partial: 'apt_install', locals: {packages: deploy_packages, clean: true, repos: deploy_repos} %>
 <% end -%>
