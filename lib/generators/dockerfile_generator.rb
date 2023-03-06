@@ -468,7 +468,7 @@ private
 
     # start with databases: sqlite3, postgres, mysql
     packages << "libsqlite3-0" if options.sqlite3? || @sqlite3
-    packages << "postgresql-client" if options.postgresql? || @postgresql
+    packages << "postgresql-client-14" if options.postgresql? || @postgresql
     packages << "default-mysql-client" if options.mysql || @mysql
 
     # ActiveStorage preview support
